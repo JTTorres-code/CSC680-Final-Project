@@ -22,7 +22,7 @@ The **Checklist App** is a productivity application that helps users organize ta
 - Implement best practices in UI/UX design  
 
 ## ✅ Must-Have Features
-- [] Create and manage multiple checklists  
+- [ ] Create and manage multiple checklists  
 - [X] Add/edit/delete checklist items  
 - [X] Mark items as complete/incomplete  
 - [X] Data persistence using CoreData  
