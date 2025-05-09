@@ -4,7 +4,7 @@
 - Ting Feng  
 - Hugo Gomez  
 - Jacob Torres  
-- Yonatan Leake  
+- Yonatan Leake    
 
 ## 📱 Project Description
 The **Checklist App** is a productivity application that helps users organize tasks efficiently. It enables users to create, manage, and track completion of checklist items with **local data persistence**. The app demonstrates core iOS development competencies including:
@@ -23,11 +23,10 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 ## ✅ Must-Have Features
 - [ ] Create and manage multiple checklists  
-- [ ] Add/edit/delete checklist items  
-- [ ] Mark items as complete/incomplete  
-- [ ] Data persistence using CoreData  
-- [ ] Clean, intuitive UI with smooth animations  
-- [ ] Responsive design for all device sizes  
+- [X] Add/edit/delete checklist items  
+- [X] Mark items as complete/incomplete  
+- [X] Data persistence using CoreData  
+- [X] Clean, intuitive UI with smooth animations  
 
 ## ✨ Nice-to-Have Features
 - [ ] Due Dates & Sorting  
