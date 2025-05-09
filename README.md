@@ -27,7 +27,6 @@ The **Checklist App** is a productivity application that helps users organize ta
 - [X] Mark items as complete/incomplete  
 - [X] Data persistence using CoreData  
 - [X] Clean, intuitive UI with smooth animations  
-- [ ] Responsive design for all device sizes  
 
 ## ✨ Nice-to-Have Features
 - [ ] Due Dates & Sorting  
