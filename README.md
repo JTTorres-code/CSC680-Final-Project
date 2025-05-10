@@ -1,7 +1,7 @@
 # ✅ Checklist App - CSC 680 Final Project
 
-## 👥 Team Members
-- Ting Feng  
+## 👥 Team Members(Studend ID)
+- Ting Feng (922992561)
 - Hugo Gomez  
 - Jacob Torres  
 - Yonatan Leake    
