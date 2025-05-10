@@ -3,7 +3,7 @@
 ## 👥 Team Members(Studend ID)
 - Ting Feng (922992561)
 - Hugo Gomez  
-- Jacob Torres  
+- Jacob Torres  (921890447)
 - Yonatan Leake    
 
 ## 📱 Project Description
