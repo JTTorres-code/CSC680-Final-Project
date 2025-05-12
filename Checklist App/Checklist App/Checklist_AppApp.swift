@@ -11,18 +11,19 @@ import CoreData
 @main
 struct Checklist_AppApp: App {
     let persistenceController = PersistenceController.shared
-    
+
     var body: some Scene {
         WindowGroup {
-            ChecklistView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ChecklistListView(context: persistenceController.container.viewContext)
+                .environment(\EnvironmentValues.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
+
 struct PersistenceController {
     static let shared = PersistenceController()
     let container: NSPersistentContainer
-    
+
     init() {
         container = NSPersistentContainer(name: "ChecklistModel")
         container.loadPersistentStores { description, error in
@@ -32,3 +33,4 @@ struct PersistenceController {
         }
     }
 }
+
