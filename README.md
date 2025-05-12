@@ -4,7 +4,7 @@
 - Ting Feng (922992561)
 - Hugo Gomez  
 - Jacob Torres  (921890447)
-- Yonatan Leake    
+- Yonatan Leake  (918695705)  
 
 ## 📱 Project Description
 The **Checklist App** is a productivity application that helps users organize tasks efficiently. It enables users to create, manage, and track completion of checklist items with **local data persistence**. The app demonstrates core iOS development competencies including:
