@@ -29,6 +29,7 @@ extension ChecklistItem {
         newItem.id = self.id
         newItem.title = self.title
         newItem.isCompleted = self.isCompleted
+        newItem.dueDate = self.dueDate
         return newItem
     }
     
@@ -36,7 +37,8 @@ extension ChecklistItem {
         ChecklistItem(
             id: item.id ?? UUID(),
             title: item.title ?? "",
-            isCompleted: item.isCompleted
+            isCompleted: item.isCompleted,
+            dueDate: item.dueDate
         )
     }
 }
