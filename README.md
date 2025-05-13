@@ -2,7 +2,7 @@
 
 ## 👥 Team Members(Studend ID)
 - Ting Feng (922992561)
-- Hugo Gomez  
+- Hugo Gomez (921810640)
 - Jacob Torres  (921890447)
 - Yonatan Leake  (918695705)  
 
@@ -22,18 +22,18 @@ The **Checklist App** is a productivity application that helps users organize ta
 - Implement best practices in UI/UX design  
 
 ## ✅ Must-Have Features
-- [ ] Create and manage multiple checklists  
+- [X] Create and manage multiple checklists  
 - [X] Add/edit/delete checklist items  
 - [X] Mark items as complete/incomplete  
 - [X] Data persistence using CoreData  
 - [X] Clean, intuitive UI with smooth animations  
 
 ## ✨ Nice-to-Have Features
-- [ ] Due Dates & Sorting  
+- [X] Due Dates & Sorting  
 - [ ] Dark/Light mode toggle  
 - [ ] Checklist sharing functionality  
 - [ ] Reorder items  
-- [ ] Custom checklist icons/colors  
+- [X] Custom checklist background colors  
 
 ## 🛠️ Technology Stack
 - Swift  
@@ -44,24 +44,24 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 ## 📊 Milestone Progress
 
-### Milestone 1: Project Setup *(In Progress)*
+### Milestone 1: Project Setup *(Complete)*
 - [x] GitHub repository created  
 - [x] Project proposal finalized  
-- [ ] Wireframes created  
-- [ ] Development environment configured  
+- [X] Wireframes created  
+- [X] Development environment configured  
 
-### Milestone 2: Prototype *(In Progress)*
-- [ ] CoreData model implemented  
-- [ ] Basic UI for all must-have features  
-- [ ] ViewModel architecture established  
-- [ ] Data persistence working  
+### Milestone 2: Prototype *(Complete)*
+- [X] CoreData model implemented  
+- [X] Basic UI for all must-have features  
+- [X] ViewModel architecture established  
+- [X] Data persistence working  
 
 ### Milestone 3: Final Submission
-- [ ] All must-have features implemented  
-- [ ] Code review and optimization  
+- [X] All must-have features implemented  
+- [X] Code review and optimization  
 - [ ] Final testing and bug fixes  
-- [ ] Possible in-class presentation  
-- [ ] Documentation completed  
+- [X] Possible in-class presentation  
+- [X] Documentation completed  
 
 ## 🎨 Wireframes
 ![Main Screen](wireframes/main.png)  
@@ -77,14 +77,14 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 | Feature                  | Estimated Time | Actual Time | Status       |
 |--------------------------|----------------|-------------|--------------|
-| CoreData Model Setup     | 3 hours        | -           | In Progress  |
-| Main Checklist View      | 4 hours        | -           | In Progress  |
-| Item Management          | 3 hours        | -           | In Progress  |
-| Data Persistence         | 3 hours        | -           | In Progress  |
-| UI Polish & Animations   | 5 hours        | -           | In Progress  |
-| Due Dates                | 2 hours        | -           | Pending      |
+| CoreData Model Setup     | 3 hours        | -           | Done         |
+| Main Checklist View      | 4 hours        | -           | Done         |
+| Item Management          | 3 hours        | -           | Done         |
+| Data Persistence         | 3 hours        | -           | Done         |
+| UI Polish & Animations   | 5 hours        | -           | Done         |
+| Due Dates                | 2 hours        | -           | Done         |
 
-**Total Estimated Time:** 20 hours  
+**Total Estimated Time:** 20~50 hours  
 **Current Time Invested:** *TBD*
 
 ## 🏗️ Technical Implementation
