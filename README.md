@@ -29,11 +29,11 @@ The **Checklist App** is a productivity application that helps users organize ta
 - [X] Clean, intuitive UI with smooth animations  
 
 ## ✨ Nice-to-Have Features
-- [ ] Due Dates & Sorting  
+- [X] Due Dates & Sorting  
 - [ ] Dark/Light mode toggle  
 - [ ] Checklist sharing functionality  
 - [ ] Reorder items  
-- [ ] Custom checklist icons/colors  
+- [X] Custom checklist background colors  
 
 ## 🛠️ Technology Stack
 - Swift  
@@ -57,11 +57,11 @@ The **Checklist App** is a productivity application that helps users organize ta
 - [X] Data persistence working  
 
 ### Milestone 3: Final Submission
-- [ ] All must-have features implemented  
-- [ ] Code review and optimization  
+- [X] All must-have features implemented  
+- [X] Code review and optimization  
 - [ ] Final testing and bug fixes  
-- [ ] Possible in-class presentation  
-- [ ] Documentation completed  
+- [X] Possible in-class presentation  
+- [X] Documentation completed  
 
 ## 🎨 Wireframes
 ![Main Screen](wireframes/main.png)  
@@ -77,14 +77,14 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 | Feature                  | Estimated Time | Actual Time | Status       |
 |--------------------------|----------------|-------------|--------------|
-| CoreData Model Setup     | 3 hours        | -           | In Progress  |
-| Main Checklist View      | 4 hours        | -           | In Progress  |
-| Item Management          | 3 hours        | -           | In Progress  |
-| Data Persistence         | 3 hours        | -           | In Progress  |
-| UI Polish & Animations   | 5 hours        | -           | In Progress  |
-| Due Dates                | 2 hours        | -           | Pending      |
+| CoreData Model Setup     | 3 hours        | -           | Done         |
+| Main Checklist View      | 4 hours        | -           | Done         |
+| Item Management          | 3 hours        | -           | Done         |
+| Data Persistence         | 3 hours        | -           | Done         |
+| UI Polish & Animations   | 5 hours        | -           | Done         |
+| Due Dates                | 2 hours        | -           | Done         |
 
-**Total Estimated Time:** 20 hours  
+**Total Estimated Time:** 20~50 hours  
 **Current Time Invested:** *TBD*
 
 ## 🏗️ Technical Implementation
