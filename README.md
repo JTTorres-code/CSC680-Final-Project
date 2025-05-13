@@ -2,7 +2,7 @@
 
 ## 👥 Team Members(Studend ID)
 - Ting Feng (922992561)
-- Hugo Gomez  
+- Hugo Gomez (921810640)
 - Jacob Torres  (921890447)
 - Yonatan Leake  (918695705)  
 
@@ -22,7 +22,7 @@ The **Checklist App** is a productivity application that helps users organize ta
 - Implement best practices in UI/UX design  
 
 ## ✅ Must-Have Features
-- [ ] Create and manage multiple checklists  
+- [X] Create and manage multiple checklists  
 - [X] Add/edit/delete checklist items  
 - [X] Mark items as complete/incomplete  
 - [X] Data persistence using CoreData  
@@ -44,17 +44,17 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 ## 📊 Milestone Progress
 
-### Milestone 1: Project Setup *(In Progress)*
+### Milestone 1: Project Setup *(Complete)*
 - [x] GitHub repository created  
 - [x] Project proposal finalized  
-- [ ] Wireframes created  
-- [ ] Development environment configured  
+- [X] Wireframes created  
+- [X] Development environment configured  
 
-### Milestone 2: Prototype *(In Progress)*
-- [ ] CoreData model implemented  
-- [ ] Basic UI for all must-have features  
-- [ ] ViewModel architecture established  
-- [ ] Data persistence working  
+### Milestone 2: Prototype *(Complete)*
+- [X] CoreData model implemented  
+- [X] Basic UI for all must-have features  
+- [X] ViewModel architecture established  
+- [X] Data persistence working  
 
 ### Milestone 3: Final Submission
 - [ ] All must-have features implemented  
