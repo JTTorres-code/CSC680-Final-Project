@@ -3,7 +3,7 @@
 //  Checklist App
 //
 //  Created by hugo gomez on 5/8/25.
-//
+//  Modified by Ting Feng on 5/12/25
 
 import Foundation
 import CoreData
@@ -77,11 +77,15 @@ class ChecklistViewModel: ObservableObject {
         }
     }
 
-    // ✅ Load only items for the current checklist
+    // ✅ Load only items for the current checklist, sort by due date
     private func loadItems() {
         let request: NSFetchRequest<CDChecklistItem> = CDChecklistItem.fetchRequest()
-        request.predicate = NSPredicate(format: "checklist.id == %@", checklistID as CVarArg)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \CDChecklistItem.title, ascending: true)]
+            request.predicate = NSPredicate(format: "checklist.id == %@", checklistID as CVarArg)
+
+            // 🔽 Sort by dueDate (nil values will be last if ascending is true)
+            request.sortDescriptors = [
+                NSSortDescriptor(keyPath: \CDChecklistItem.dueDate, ascending: true)
+            ]
 
         do {
             let results = try context.fetch(request)
