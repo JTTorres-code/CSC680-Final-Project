@@ -71,7 +71,6 @@ struct AddItemView: View {
                             }
                         }
                     }
-                    .listRowBackground(Color("Background"))
                     
                     Section {
                         Button(action: addItem) {
@@ -89,7 +88,6 @@ struct AddItemView: View {
                     }
                 }
                 .navigationTitle("Add Item")
-                .background(Color("Background"))
                 .scrollContentBackground(.hidden)
                 .navigationBarItems(trailing: Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
