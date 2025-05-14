@@ -15,8 +15,8 @@ struct AddItemView: View {
     
     var body: some View {
         ZStack{
-            Color(red: 245/255, green: 222/255, blue: 179/255) // RGB for wheat/light brown
-                .ignoresSafeArea()
+            Color("Background")
+                            .ignoresSafeArea()
             NavigationView {
                 Form {
                     Section(header: Text("New Item")) {
@@ -25,7 +25,7 @@ struct AddItemView: View {
                         // ➕ DatePicker for selecting due date
                         DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
                     }
-                    
+                    .listRowBackground(Color("Background"))
                     Section {
                         Button("Add Item") {
                             if !title.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -35,8 +35,11 @@ struct AddItemView: View {
                         }
                         .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
+                    .listRowBackground(Color("Background"))
                 }
                 .navigationTitle("Add Item")
+                .background(Color("Background"))
+                .scrollContentBackground(.hidden)
                 .navigationBarItems(trailing: Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
                 })

@@ -9,16 +9,19 @@ struct ChecklistView: View {
     
     var body: some View {
         ZStack{
-            Color(red: 245/255, green: 222/255, blue: 179/255) // RGB for wheat/light brown
+            Color("Background")
                 .ignoresSafeArea()
             List {
                 ForEach(viewModel.items) { item in
                     ChecklistRowView(item: item) {
                         viewModel.toggleItem(item)
                     }
+                    .listRowBackground(Color("Background"))
                 }
                 .onDelete(perform: viewModel.deleteItem)
             }
+            .scrollContentBackground(.hidden) 
+            .background(Color("Background"))
             .navigationTitle(checklist.name)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
