@@ -1,3 +1,10 @@
+
+//  AddItemView.swift
+//  Checklist App
+//
+//  Created by hugo gomez on 5/8/25.
+//  Modified by Ting Feng on 5/12/25
+
 import SwiftUI
 
 struct AddItemView: View {
