@@ -30,9 +30,9 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 ## ✨ Nice-to-Have Features
 - [X] Due Dates & Sorting  
-- [ ] Dark/Light mode toggle  
-- [ ] Checklist sharing functionality  
-- [ ] Reorder items  
+- [X] Dark/Light mode toggle  
+- [X] Checklist sharing functionality  
+- [X] Reorder items  
 - [X] Custom checklist background colors  
 
 ## 🛠️ Technology Stack
@@ -59,7 +59,7 @@ The **Checklist App** is a productivity application that helps users organize ta
 ### Milestone 3: Final Submission
 - [X] All must-have features implemented  
 - [X] Code review and optimization  
-- [ ] Final testing and bug fixes  
+- [X] Final testing and bug fixes  
 - [X] Possible in-class presentation  
 - [X] Documentation completed  
 
