@@ -33,12 +33,12 @@ extension ChecklistItem {
         return newItem
     }
     
-    static func fromManagedObject(_ item: CDChecklistItem) -> ChecklistItem {
+    static func fromManagedObject(_ managedItem: CDChecklistItem) -> ChecklistItem {
         ChecklistItem(
-            id: item.id ?? UUID(),
-            title: item.title ?? "",
-            isCompleted: item.isCompleted,
-            dueDate: item.dueDate
+            id: managedItem.id ?? UUID(),
+            title: managedItem.title ?? "",
+            isCompleted: managedItem.isCompleted,
+            dueDate: managedItem.dueDate
         )
     }
 }

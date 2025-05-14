@@ -21,6 +21,7 @@ struct ChecklistView: View {
             }
             .scrollContentBackground(.hidden) 
             .background(Color("Background"))
+            .environmentObject(viewModel)
             .navigationTitle(checklist.name)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

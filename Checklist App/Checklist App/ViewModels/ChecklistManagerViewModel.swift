@@ -31,11 +31,12 @@ class ChecklistManagerViewModel: ObservableObject {
     }
 
     // Add a new checklist
-    func addChecklist(name: String) {
-        let newChecklist = Checklist(name: name)
+    func addChecklist(name: String, emoji: String = "📝") {
+        let newChecklist = Checklist(name: name, emoji: emoji)
         _ = newChecklist.toManagedObject(context: context)
         saveContext()
     }
+
 
     // Delete a checklist
     func deleteChecklist(at offsets: IndexSet) {
@@ -53,6 +54,25 @@ class ChecklistManagerViewModel: ObservableObject {
         }
         saveContext()
     }
+    
+    func updateChecklistNameAndEmoji(for checklistID: UUID, newName: String, newEmoji: String) {
+        let request: NSFetchRequest<CDChecklist> = CDChecklist.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", checklistID as CVarArg)
+
+        do {
+            if let checklistEntity = try context.fetch(request).first {
+                checklistEntity.name = newName
+                checklistEntity.emoji = newEmoji  
+                saveContext()
+            } else {
+                print("Checklist not found for ID: \(checklistID)")
+            }
+        } catch {
+            print("Error updating checklist name and emoji: \(error)")
+        }
+    }
+
+    
 
     // Save context and reload checklists
     private func saveContext() {

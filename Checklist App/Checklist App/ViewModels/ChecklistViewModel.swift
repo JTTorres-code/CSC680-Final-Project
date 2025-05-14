@@ -67,6 +67,24 @@ class ChecklistViewModel: ObservableObject {
         }
         saveContext()
     }
+    
+    func updateItem(_ item: ChecklistItem, newTitle: String, newDueDate: Date?) {
+        let request: NSFetchRequest<CDChecklistItem> = CDChecklistItem.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", item.id as CVarArg)
+
+        do {
+            if let managedItem = try context.fetch(request).first {
+                managedItem.title = newTitle
+                managedItem.dueDate = newDueDate
+                saveContext()
+            } else {
+                print("Item with ID \(item.id) not found in Core Data")
+            }
+        } catch {
+            print("Error updating item: \(error)")
+        }
+    }
+    
 
     private func saveContext() {
         do {

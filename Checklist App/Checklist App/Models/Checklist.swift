@@ -11,13 +11,15 @@ import CoreData
 struct Checklist: Identifiable, Codable {
     let id: UUID
     var name: String
+    var emoji: String?
     var items: [ChecklistItem]
 
-    init(id: UUID = UUID(), name: String, items: [ChecklistItem] = []) {
-        self.id = id
-        self.name = name
-        self.items = items
-    }
+    init(id: UUID = UUID(), name: String, emoji: String? = nil, items: [ChecklistItem] = []) {
+            self.id = id
+            self.name = name
+            self.emoji = emoji
+            self.items = items
+        }
 }
 
 // MARK: - Core Data Conversion
@@ -28,28 +30,29 @@ extension Checklist {
         let checklistEntity = CDChecklist(context: context)
         checklistEntity.id = self.id
         checklistEntity.name = self.name
-
-        // Convert each ChecklistItem to Core Data and associate it
+        checklistEntity.emoji = self.emoji
+        
         let itemEntities = self.items.map { item -> CDChecklistItem in
             let itemEntity = item.toManagedObject(context: context)
             itemEntity.checklist = checklistEntity
             return itemEntity
         }
-
+        
         checklistEntity.items = Set(itemEntities) as NSSet
         return checklistEntity
     }
-
+    
+    
     /// Converts a `CDChecklist` Core Data object back into a `Checklist` model
     static func fromManagedObject(_ entity: CDChecklist) -> Checklist {
         let itemsArray: [ChecklistItem] = (entity.items as? Set<CDChecklistItem>)?.map {
             ChecklistItem.fromManagedObject($0)
         } ?? []
-
-
+        
         return Checklist(
             id: entity.id ?? UUID(),
             name: entity.name ?? "Untitled",
+            emoji: entity.emoji,   
             items: itemsArray
         )
     }

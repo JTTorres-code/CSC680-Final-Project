@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ChecklistRowView: View {
+    @EnvironmentObject var viewModel: ChecklistViewModel
+    @State private var showingEditSheet = false
     let item: ChecklistItem
     let action: () -> Void
     
@@ -16,7 +18,6 @@ struct ChecklistRowView: View {
             HStack {
                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(item.isCompleted ? .green : .gray)
-                
                 VStack(alignment: .leading) {
                     Text(item.title)
                         .strikethrough(item.isCompleted)
@@ -30,12 +31,23 @@ struct ChecklistRowView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .padding(.horizontal)
-            .contentShape(Rectangle())
-            .onTapGesture(perform: action)
-        }
-    }
+                                Button(action: { showingEditSheet = true }) {
+                                    Image(systemName: "pencil")
+                                        .foregroundColor(.blue)
+                                        .padding(.leading, 8)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .padding(.horizontal)
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture(perform: action)
+                        .sheet(isPresented: $showingEditSheet) {
+                            EditItemView(item: item)
+                                .environmentObject(viewModel)
+                            }
+                        }
+                    
         
         // ➕ Formatter for due date
         private var dateFormatter: DateFormatter {
@@ -44,5 +56,6 @@ struct ChecklistRowView: View {
             return formatter
         }
     }
-    
+
+        
 
