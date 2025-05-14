@@ -13,8 +13,6 @@ struct ChecklistRowView: View {
     
     var body: some View {
         ZStack{
-            Color(red: 245/255, green: 222/255, blue: 179/255) // RGB for wheat/light brown
-                .ignoresSafeArea()
             HStack {
                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(item.isCompleted ? .green : .gray)
@@ -31,7 +29,9 @@ struct ChecklistRowView: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .padding(.horizontal)
             .contentShape(Rectangle())
             .onTapGesture(perform: action)
         }
