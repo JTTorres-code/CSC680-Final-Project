@@ -33,7 +33,7 @@ struct ChecklistListView: View {
                             Text(checklist.name)
                                 .font(.headline)
                         }
-                        .listRowBackground(Color("Background"))
+                     
                     }
                     .onDelete(perform: managerVM.deleteChecklist)
                 }

@@ -13,7 +13,6 @@ struct ChecklistRowView: View {
     
     var body: some View {
         ZStack{
-            Color("Background")
             HStack {
                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(item.isCompleted ? .green : .gray)

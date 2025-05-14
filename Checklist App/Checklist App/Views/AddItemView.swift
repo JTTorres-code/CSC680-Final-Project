@@ -35,7 +35,6 @@ struct AddItemView: View {
                         }
                         .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
-                    .listRowBackground(Color("Background"))
                 }
                 .navigationTitle("Add Item")
                 .background(Color("Background"))

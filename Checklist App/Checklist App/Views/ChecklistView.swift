@@ -16,7 +16,6 @@ struct ChecklistView: View {
                     ChecklistRowView(item: item) {
                         viewModel.toggleItem(item)
                     }
-                    .listRowBackground(Color("Background"))
                 }
                 .onDelete(perform: viewModel.deleteItem)
             }
