@@ -13,6 +13,7 @@ struct EditItemView: View {
     @State private var dueDate: Date?
     @State private var showDatePicker: Bool = false
     @State private var tempSelectedDate: Date = Date()
+    @State private var priority: Priority
     
     let item: ChecklistItem
     
@@ -24,6 +25,7 @@ struct EditItemView: View {
         if let existingDate = item.dueDate {
             _tempSelectedDate = State(initialValue: existingDate)
         }
+        _priority = State(initialValue: item.priority)
     }
     
     var body: some View {
@@ -82,39 +84,49 @@ struct EditItemView: View {
                             }
                         }
                     }
-                    
-                    Section {
-                        Button(action: saveChanges) {
-                            HStack {
-                                Spacer()
-                                Text("Save Changes")
-                                Spacer()
-                            }
+                    Section(header: Text("Priority")) {
+                        Picker("Priority", selection: $priority) {
+                            Text("Low").tag(Priority.low)
+                            Text("Medium").tag(Priority.medium)
+                            Text("High").tag(Priority.high)
                         }
-                        .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
-                        .padding()
-                        .background(title.trimmingCharacters(in: .whitespaces).isEmpty ? Color.gray : Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .pickerStyle(.segmented)
                     }
+                        
+                        Section {
+                            Button(action: saveChanges) {
+                                HStack {
+                                    Spacer()
+                                    Text("Save Changes")
+                                    Spacer()
+                                }
+                            }
+                            .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                            .padding()
+                            .background(title.trimmingCharacters(in: .whitespaces).isEmpty ? Color.gray : Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                        }
+                    }
+                    .navigationTitle("Edit Item")
+                    .scrollContentBackground(.hidden)
+                    .navigationBarItems(trailing: Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    })
                 }
-                .navigationTitle("Edit Item")
-                .scrollContentBackground(.hidden)
-                .navigationBarItems(trailing: Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
-                })
+            }
+        }
+        
+        private func saveChanges() {
+            if !title.trimmingCharacters(in: .whitespaces).isEmpty {
+                viewModel.updateItem(
+                    item,
+                    newTitle: title,
+                    newDueDate: dueDate,
+                    newPriority: priority
+                )
+                presentationMode.wrappedValue.dismiss()
             }
         }
     }
-    
-    private func saveChanges() {
-        if !title.trimmingCharacters(in: .whitespaces).isEmpty {
-            viewModel.updateItem(
-                item,
-                newTitle: title,
-                newDueDate: dueDate
-            )
-            presentationMode.wrappedValue.dismiss()
-        }
-    }
-}
+

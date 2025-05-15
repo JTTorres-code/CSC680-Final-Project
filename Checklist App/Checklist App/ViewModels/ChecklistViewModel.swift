@@ -93,7 +93,7 @@ class ChecklistViewModel: ObservableObject {
             )
     }
     
-    func updateItem(_ item: ChecklistItem, newTitle: String, newDueDate: Date?) {
+    func updateItem(_ item: ChecklistItem, newTitle: String, newDueDate: Date?, newPriority: Priority) {
         let request: NSFetchRequest<CDChecklistItem> = CDChecklistItem.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", item.id as CVarArg)
         
@@ -101,6 +101,7 @@ class ChecklistViewModel: ObservableObject {
             if let managedItem = try context.fetch(request).first {
                 managedItem.title = newTitle
                 managedItem.dueDate = newDueDate
+                managedItem.priority = newPriority.rawValue
                 saveContext()
             } else {
                 print("Item with ID \(item.id) not found in Core Data")
