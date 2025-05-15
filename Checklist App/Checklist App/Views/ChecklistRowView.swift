@@ -43,7 +43,7 @@ struct ChecklistRowView: View {
                         .contentShape(Rectangle())
                         .onTapGesture(perform: action)
                         .sheet(isPresented: $showingEditSheet) {
-                            EditItemView(item: item)
+                            EditItemView(item: item, viewModel: viewModel)
                                 .environmentObject(viewModel)
                             }
                         }

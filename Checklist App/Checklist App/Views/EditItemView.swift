@@ -7,54 +7,114 @@
 import SwiftUI
 
 struct EditItemView: View {
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var viewModel: ChecklistViewModel
-    @State private var editedTitle: String
-    @State private var editedDueDate: Date?
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModel: ChecklistViewModel
+    @State private var title: String
+    @State private var dueDate: Date?
+    @State private var showDatePicker: Bool = false
+    @State private var tempSelectedDate: Date = Date()
     
     let item: ChecklistItem
     
-    init(item: ChecklistItem) {
+    init(item: ChecklistItem, viewModel: ChecklistViewModel) {
         self.item = item
-        _editedTitle = State(initialValue: item.title)
-        _editedDueDate = State(initialValue: item.dueDate)
+        self.viewModel = viewModel
+        _title = State(initialValue: item.title)
+        _dueDate = State(initialValue: item.dueDate)
+        if let existingDate = item.dueDate {
+            _tempSelectedDate = State(initialValue: existingDate)
+        }
     }
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section {
-                    TextField("Item title", text: $editedTitle)
-                    
-                    DatePicker("Due Date",
-                              selection: Binding(
-                                get: { editedDueDate ?? Date() },
-                                set: { editedDueDate = $0 }
-                              ),
-                              displayedComponents: .date)
-                    .datePickerStyle(.graphical)
-                    
-                    Button("Remove Due Date") {
-                        editedDueDate = nil
+        ZStack {
+            Color("Background")
+                .ignoresSafeArea()
+            
+            NavigationView {
+                Form {
+                    Section(header: Text("Edit Item")) {
+                        TextField("Enter item title", text: $title)
+                        HStack {
+                            Text("Due Date")
+                            Spacer()
+                            
+                            if let dueDate = dueDate {
+                                HStack {
+                                    Text(dueDate.formatted(date: .abbreviated, time: .omitted))
+                                    Button(action: {
+                                        self.dueDate = nil
+                                    }) {
+                                        Image(systemName: "xmark.circle.fill")
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                            } else {
+                                Button(action: {
+                                    tempSelectedDate = Date()
+                                    showDatePicker = true
+                                }) {
+                                    Text("Add Due Date")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                        }
+                        if showDatePicker {
+                            VStack {
+                                DatePicker(
+                                    "Select Date",
+                                    selection: $tempSelectedDate,
+                                    displayedComponents: .date
+                                )
+                                .datePickerStyle(.graphical)
+                                
+                                Button("Done") {
+                                    dueDate = tempSelectedDate
+                                    showDatePicker = false
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                                .bold()
+                                .padding(.top)
+                            }
+                        }
                     }
-                    .foregroundColor(.red)
-                    .disabled(editedDueDate == nil)
-                }
-                
-                Section {
-                    Button("Save Changes") {
-                        viewModel.updateItem(
-                            item,
-                            newTitle: editedTitle,
-                            newDueDate: editedDueDate
-                        )
-                        dismiss()
+                    
+                    Section {
+                        Button(action: saveChanges) {
+                            HStack {
+                                Spacer()
+                                Text("Save Changes")
+                                Spacer()
+                            }
+                        }
+                        .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                        .padding()
+                        .background(title.trimmingCharacters(in: .whitespaces).isEmpty ? Color.gray : Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                     }
-                    .disabled(editedTitle.isEmpty)
                 }
+                .navigationTitle("Edit Item")
+                .scrollContentBackground(.hidden)
+                .navigationBarItems(trailing: Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                })
             }
-            .navigationTitle("Edit Item")
-            .navigationBarItems(trailing: Button("Cancel") { dismiss() })
+        }
+    }
+    
+    private func saveChanges() {
+        if !title.trimmingCharacters(in: .whitespaces).isEmpty {
+            viewModel.updateItem(
+                item,
+                newTitle: title,
+                newDueDate: dueDate
+            )
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }
