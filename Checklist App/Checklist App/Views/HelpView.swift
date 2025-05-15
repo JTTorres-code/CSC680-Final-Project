@@ -26,7 +26,7 @@ struct HelpView: View {
                     
                     HelpSection(
                         title: "Adding Items",
-                        content: "Inside a checklist, tap the + to create new tasks. You can set due dates that sort by earliest due date first"
+                        content: "Inside a checklist, tap the + to create new tasks. You can set due dates that automatically sort by earliest due date first. If a task does not have a due date, it will appear at the below the ones with due dates."
                     )
                     
                     HelpSection(
@@ -37,6 +37,11 @@ struct HelpView: View {
                     HelpSection(
                         title: "Editing",
                         content: "Tap the pencil icon to rename a checklist or change its emoji. You can also edit task also by pressing the pencil icon to change the name and due date or remove due dates. Swipe left to delete."
+                    )
+                    
+                    HelpSection(
+                        title: "Setting Priority",
+                        content: "Set priority level for your tasks, low (green), medium (orange), high (red). This will help know which tasks need to been completed first."
                     )
                 }
                 .padding()
