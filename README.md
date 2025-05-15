@@ -76,6 +76,9 @@ The **Checklist App** is a productivity application that helps users organize ta
 ![Add Item](wireframes/add.png)  
 *Form for adding new items*
 
+![Add Item](wireframes/createcl.png)  
+*Form for adding new checklists*
+
 ## ⏱️ Time Estimates & Progress Tracking
 
 | Feature                  | Estimated Time | Actual Time | Status       |
