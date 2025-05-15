@@ -41,7 +41,7 @@ struct HelpView: View {
                     
                     HelpSection(
                         title: "Setting Priority",
-                        content: "Set priority level for your tasks, low (green), medium (orange), high (red). This will help know which tasks need to been completed first."
+                        content: "Set priority level for your tasks, low (green), medium (orange), high (red). This will help know which tasks need to been completed first. Once completed, the priority indicator will go away unless unchecked again."
                     )
                     
                     HelpSection(
