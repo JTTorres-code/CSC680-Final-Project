@@ -1,4 +1,4 @@
-//
+// something didnt work and i had to adjust it again
 //  ChecklistManagerViewModel.swift
 //  Checklist App
 //
