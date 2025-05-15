@@ -13,9 +13,24 @@ struct ChecklistRowView: View {
     let item: ChecklistItem
     let action: () -> Void
     
+    private var PriorityColor: Color {
+        switch item.priority {
+        case .low: return .green
+        case .medium: return .orange
+        case .high: return .red
+            
+        }
+    }
+    
     var body: some View {
         ZStack{
+            Color("Background")
+                .ignoresSafeArea()
             HStack {
+                Circle()
+                    .fill(PriorityColor)
+                    .frame(width: 10, height: 10)
+                    
                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(item.isCompleted ? .green : .gray)
                 VStack(alignment: .leading) {

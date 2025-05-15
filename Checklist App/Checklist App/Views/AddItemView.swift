@@ -14,6 +14,7 @@ struct AddItemView: View {
     @State private var dueDate: Date? = nil
     @State private var showDatePicker: Bool = false
     @State private var tempSelectedDate: Date = Date()
+    @State private var priority: Priority = .medium
     
     var body: some View {
         ZStack {
@@ -71,7 +72,16 @@ struct AddItemView: View {
                             }
                         }
                     }
+                    Section(header: Text("Priority")) {
+                    Picker("Priority", selection: $priority) {
+                        Text("Low").tag(Priority.low)
+                        Text("Medium").tag(Priority.medium)
+                        Text("High").tag(Priority.high)
+                    }
+                .pickerStyle(.inline)
+            }
                     
+    
                     Section {
                         Button(action: addItem) {
                             HStack {
@@ -98,7 +108,10 @@ struct AddItemView: View {
     
     private func addItem() {
         if !title.trimmingCharacters(in: .whitespaces).isEmpty {
-            viewModel.addItem(title: title, dueDate: dueDate)
+            viewModel.addItem(
+                title: title,
+                dueDate: dueDate,
+                priority: priority)
             presentationMode.wrappedValue.dismiss()
         }
     }
