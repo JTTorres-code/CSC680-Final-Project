@@ -25,10 +25,11 @@ struct ChecklistRowView: View {
     var body: some View {
         ZStack{
             HStack {
-                Circle()
-                    .fill(PriorityColor)
-                    .frame(width: 10, height: 10)
-                    
+                if !item.isCompleted {
+                    Circle()
+                        .fill(PriorityColor)
+                        .frame(width: 10, height: 10)
+                }
                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(item.isCompleted ? .green : .gray)
                 VStack(alignment: .leading) {
