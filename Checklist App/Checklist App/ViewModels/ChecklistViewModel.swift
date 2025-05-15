@@ -36,7 +36,16 @@ class ChecklistViewModel: ObservableObject {
         itemEntity.checklist = checklistEntity
         
         saveContext()
+        
+        loadItems()
+        
+        NotificationCenter.default.post(
+            name: Notification.Name("ChecklistItemToggled"),
+            object: nil,
+            userInfo: ["checklistID": checklistID]
+        )
     }
+
     
     func toggleItem(_ item: ChecklistItem) {
         let request: NSFetchRequest<CDChecklistItem> = CDChecklistItem.fetchRequest()
@@ -53,7 +62,7 @@ class ChecklistViewModel: ObservableObject {
                     userInfo: ["checklistID": checklistID]
                 )
                 
-                loadItems() 
+                loadItems()
             }
         } catch {
             print("Error toggling item: \(error)")
@@ -74,6 +83,14 @@ class ChecklistViewModel: ObservableObject {
             }
         }
         saveContext()
+        
+        loadItems()
+            
+            NotificationCenter.default.post(
+                name: Notification.Name("ChecklistItemToggled"),
+                object: nil,
+                userInfo: ["checklistID": checklistID]
+            )
     }
     
     func updateItem(_ item: ChecklistItem, newTitle: String, newDueDate: Date?) {
@@ -109,18 +126,30 @@ class ChecklistViewModel: ObservableObject {
         request.predicate = NSPredicate(format: "checklist.id == %@", checklistID as CVarArg)
         
         // 🔽 Sort by dueDate (nil values will be last if ascending is true)
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "dueDate", ascending: false),
-            NSSortDescriptor(key: "dueDate", ascending: true)
-        ]
-        
-        do {
-            let results = try context.fetch(request)
-            items = results.map { ChecklistItem.fromManagedObject($0) }
-        } catch {
-            print("Error loading items: \(error)")
+        let sortByDueDate = NSSortDescriptor(
+                key: "dueDate",
+                ascending: true,
+                selector: #selector(NSDate.compare(_:))
+            )
+            request.sortDescriptors = [sortByDueDate]
+            
+            do {
+                let results = try context.fetch(request)
+                items = results
+                    .map { ChecklistItem.fromManagedObject($0) }
+                    .sorted {
+                        switch ($0.dueDate, $1.dueDate) {
+                        case (nil, nil): return false
+                        case (nil, _): return false
+                        case (_, nil): return true
+                        case (let date1, let date2):
+                            return date1! < date2!
+                        }
+                    }
+            } catch {
+                print("Error loading items: \(error)")
+            }
         }
-    }
 }
 
 
