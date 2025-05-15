@@ -21,7 +21,7 @@ class ChecklistViewModel: ObservableObject {
     }
     
     // ✅ Add item and link it to the correct checklist
-    func addItem(title: String, dueDate: Date? = nil, priority: Priority = .medium) {
+    func addItem(title: String, dueDate: Date? = nil, priority: Priority) {
         let checklistRequest: NSFetchRequest<CDChecklist> = CDChecklist.fetchRequest()
         checklistRequest.predicate = NSPredicate(format: "id == %@", checklistID as CVarArg)
         
@@ -30,7 +30,7 @@ class ChecklistViewModel: ObservableObject {
             return
         }
         
-        let newItem = ChecklistItem(title: title, dueDate: dueDate)
+        let newItem = ChecklistItem(title: title, dueDate: dueDate, priority: priority)
         
         let itemEntity = newItem.toManagedObject(context: context)
         itemEntity.checklist = checklistEntity

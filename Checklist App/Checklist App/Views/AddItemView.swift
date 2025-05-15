@@ -73,15 +73,14 @@ struct AddItemView: View {
                         }
                     }
                     Section(header: Text("Priority")) {
-                    Picker("Priority", selection: $priority) {
-                        Text("Low").tag(Priority.low)
-                        Text("Medium").tag(Priority.medium)
-                        Text("High").tag(Priority.high)
+                        Picker("Priority", selection: $priority) {
+                            Text("Low").tag(Priority.low)
+                            Text("Medium").tag(Priority.medium)
+                            Text("High").tag(Priority.high)
+                        }
+                        .pickerStyle(.segmented)
                     }
-                .pickerStyle(.inline)
-            }
                     
-    
                     Section {
                         Button(action: addItem) {
                             HStack {

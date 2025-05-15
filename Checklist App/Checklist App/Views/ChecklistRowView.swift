@@ -24,8 +24,6 @@ struct ChecklistRowView: View {
     
     var body: some View {
         ZStack{
-            Color("Background")
-                .ignoresSafeArea()
             HStack {
                 Circle()
                     .fill(PriorityColor)
