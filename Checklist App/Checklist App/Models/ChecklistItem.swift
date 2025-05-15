@@ -23,6 +23,8 @@ struct ChecklistItem: Identifiable, Codable {
 
 }
 
+
+//added a bigger break to allow for better readability
 extension ChecklistItem {
     func toManagedObject(context: NSManagedObjectContext) -> CDChecklistItem {
         let newItem = CDChecklistItem(context: context)
