@@ -7,29 +7,53 @@
 
 import Foundation
 import CoreData
+import Combine
 
 class ChecklistManagerViewModel: ObservableObject {
     @Published var checklists: [Checklist] = []
     private let context: NSManagedObjectContext
+    private var cancellables = Set<AnyCancellable>()
 
     init(context: NSManagedObjectContext) {
         self.context = context
         loadChecklists()
+        
+        NotificationCenter.default.publisher(for: Notification.Name("ChecklistItemToggled"))
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.loadChecklists() 
+            }
+            .store(in: &cancellables)
     }
 
     // Load all checklists from Core Data
     func loadChecklists() {
-        let request: NSFetchRequest<CDChecklist> = CDChecklist.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \CDChecklist.name, ascending: true)]
+            let request: NSFetchRequest<CDChecklist> = CDChecklist.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \CDChecklist.name, ascending: true)]
+            request.relationshipKeyPathsForPrefetching = ["items"]
 
-        do {
-            let results = try context.fetch(request)
-            checklists = results.map { Checklist.fromManagedObject($0) }
-        } catch {
-            print("Error loading checklists: \(error)")
+            do {
+                let results = try context.fetch(request)
+                checklists = results.map { cdChecklist in
+                    var checklist = Checklist.fromManagedObject(cdChecklist)
+                    checklist.progress = calculateProgress(for: cdChecklist)
+                    return checklist
+                }
+            } catch {
+                print("Error loading checklists: \(error)")
+            }
         }
+    
+    // Calculate completion progress for a checklist
+    private func calculateProgress(for cdChecklist: CDChecklist) -> Checklist.ProgressInfo {
+        guard let items = cdChecklist.items?.allObjects as? [CDChecklistItem] else {
+            return Checklist.ProgressInfo(completed: 0, total: 0)
+        }
+        
+        let completedCount = items.filter { $0.isCompleted }.count
+        return Checklist.ProgressInfo(completed: completedCount, total: items.count)
     }
-
+    
     // Add a new checklist
     func addChecklist(name: String, emoji: String = "📝") {
         let newChecklist = Checklist(name: name, emoji: emoji)
@@ -56,19 +80,17 @@ class ChecklistManagerViewModel: ObservableObject {
     }
     
     func updateChecklistNameAndEmoji(for checklistID: UUID, newName: String, newEmoji: String) {
-        let request: NSFetchRequest<CDChecklist> = CDChecklist.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", checklistID as CVarArg)
-
-        do {
-            if let checklistEntity = try context.fetch(request).first {
-                checklistEntity.name = newName
-                checklistEntity.emoji = newEmoji  
-                saveContext()
-            } else {
-                print("Checklist not found for ID: \(checklistID)")
+        if let index = checklists.firstIndex(where: { $0.id == checklistID }) {
+            let request: NSFetchRequest<CDChecklist> = CDChecklist.fetchRequest()
+            request.predicate = NSPredicate(format: "id == %@", checklistID as CVarArg)
+            
+            do {
+                if let cdChecklist = try context.fetch(request).first {
+                    checklists[index].progress = calculateProgress(for: cdChecklist)
+                }
+            } catch {
+                print("Error updating progress: \(error)")
             }
-        } catch {
-            print("Error updating checklist name and emoji: \(error)")
         }
     }
 

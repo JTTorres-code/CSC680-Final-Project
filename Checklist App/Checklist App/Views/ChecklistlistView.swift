@@ -4,6 +4,7 @@
 //
 //  Created by Jacob Torres on 5/12/25.
 //  Modified by Ting Feng on 5/12/25
+//  Modified by hugo gomez on 5/14/25
 
 import SwiftUI
 import CoreData
@@ -11,12 +12,14 @@ import CoreData
 struct ChecklistListView: View {
     @Environment(\.managedObjectContext) private var context
     @StateObject private var managerVM: ChecklistManagerViewModel
+    @State private var refreshID = UUID()
 
     @State private var showingAddChecklist = false
     @State private var newChecklistName = ""
     @State private var newChecklistEmoji = "📝"
     @State private var showingEmojiPicker = false
-
+    @State private var showingHelp = false
+    
     @State private var selectedChecklist: Checklist?
     @State private var editingName = ""
     @State private var editingEmoji = "📝"
@@ -41,8 +44,23 @@ struct ChecklistListView: View {
                                 HStack {
                                     Text(checklist.emoji ?? "📝")
                                         .font(.largeTitle)
-                                    Text(checklist.name)
-                                        .font(.headline)
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(checklist.name)
+                                            .font(.headline)
+                                        
+                                        if let progress = checklist.progress, progress.total > 0 {
+                                            HStack(spacing: 8) {
+                                                ProgressView(value: progress.percentage)
+                                                    .progressViewStyle(LinearProgressViewStyle(tint: .blue))
+                                                    .frame(width: 60)
+                                                
+                                                Text("\(progress.completed)/\(progress.total)")
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -68,6 +86,12 @@ struct ChecklistListView: View {
                 .scrollContentBackground(.hidden)
                 .navigationTitle("My Checklists")
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: { showingHelp.toggle() }) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title3)
+                        }
+                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: { showingAddChecklist = true }) {
                             Label("Add Checklist", systemImage: "plus")
@@ -168,6 +192,9 @@ struct ChecklistListView: View {
                             }
                         }
                     }
+                }
+                .sheet(isPresented: $showingHelp) {
+                    HelpView()
                 }
             }
         }

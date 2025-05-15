@@ -45,7 +45,15 @@ class ChecklistViewModel: ObservableObject {
         do {
             if let managedItem = try context.fetch(request).first {
                 managedItem.isCompleted.toggle()
-                saveContext()
+                try context.save()
+                
+                NotificationCenter.default.post(
+                    name: Notification.Name("ChecklistItemToggled"),
+                    object: nil,
+                    userInfo: ["checklistID": checklistID]
+                )
+                
+                loadItems() 
             }
         } catch {
             print("Error toggling item: \(error)")

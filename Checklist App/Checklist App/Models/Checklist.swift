@@ -13,12 +13,29 @@ struct Checklist: Identifiable, Codable {
     var name: String
     var emoji: String?
     var items: [ChecklistItem]
+    var progress: ProgressInfo?
+    
+    struct ProgressInfo: Codable {
+            var completed: Int
+            var total: Int
+            var percentage: Double
+            
+            init(completed: Int = 0, total: Int = 0) {
+                self.completed = completed
+                self.total = total
+                self.percentage = total > 0 ? Double(completed) / Double(total) : 0
+            }
+        }
 
-    init(id: UUID = UUID(), name: String, emoji: String? = nil, items: [ChecklistItem] = []) {
+
+    init(id: UUID = UUID(), name: String, emoji: String? = nil, items: [ChecklistItem] = [], progress: ProgressInfo? = nil) {
             self.id = id
             self.name = name
             self.emoji = emoji
             self.items = items
+            self.progress = progress ?? ProgressInfo(
+                    completed: items.filter { $0.isCompleted }.count,
+                    total: items.count)
         }
 }
 
@@ -45,17 +62,25 @@ extension Checklist {
     
     /// Converts a `CDChecklist` Core Data object back into a `Checklist` model
     static func fromManagedObject(_ entity: CDChecklist) -> Checklist {
-        let itemsArray: [ChecklistItem] = (entity.items as? Set<CDChecklistItem>)?.map {
-            ChecklistItem.fromManagedObject($0)
-        } ?? []
-        
-        return Checklist(
-            id: entity.id ?? UUID(),
-            name: entity.name ?? "Untitled",
-            emoji: entity.emoji,   
-            items: itemsArray
-        )
+            let itemsArray: [ChecklistItem] = (entity.items as? Set<CDChecklistItem>)?.map {
+                ChecklistItem.fromManagedObject($0)
+            } ?? []
+            
+            let completedCount = itemsArray.filter { $0.isCompleted }.count
+            let totalCount = itemsArray.count
+            
+            return Checklist(
+                id: entity.id ?? UUID(),
+                name: entity.name ?? "Untitled",
+                emoji: entity.emoji,
+                items: itemsArray,
+                progress: ProgressInfo(
+                    completed: completedCount,
+                    total: totalCount
+                )
+            )
+        }
     }
-}
+
 
 
