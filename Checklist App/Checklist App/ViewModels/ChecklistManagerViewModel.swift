@@ -86,10 +86,16 @@ class ChecklistManagerViewModel: ObservableObject {
             
             do {
                 if let cdChecklist = try context.fetch(request).first {
+                    cdChecklist.name = newName
+                    cdChecklist.emoji = newEmoji
+                    checklists[index].name = newName
+                    checklists[index].emoji = newEmoji
                     checklists[index].progress = calculateProgress(for: cdChecklist)
+                    
+                    try context.save()
                 }
             } catch {
-                print("Error updating progress: \(error)")
+                print("Error updating checklist: \(error)")
             }
         }
     }
