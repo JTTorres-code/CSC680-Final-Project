@@ -31,9 +31,9 @@ The **Checklist App** is a productivity application that helps users organize ta
 ## ✨ Nice-to-Have Features
 - [X] Due Dates & Sorting  
 - [X] Dark/Light mode toggle (Works with Apple Dark/Light mode setting)
-- [] Checklist sharing functionality  
+- [ ] Checklist sharing functionality  
 - [X] Reorder items (Did this with sorting) 
-- [] Custom checklist background colors
+- [ ] Custom checklist background colors
 - [X] Checklist emoji customization
 - [X] Help Guide
 - [X] Progress bar
