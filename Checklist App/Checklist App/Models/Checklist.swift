@@ -3,7 +3,7 @@
 //  Checklist App
 //
 //  Created by Jacob Torres on 5/12/25.
-//
+// It wasnt popping up into my commits so I had to manually change it this way 
 
 import Foundation
 import CoreData
