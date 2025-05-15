@@ -1,6 +1,6 @@
 # ✅ Checklist App - CSC 680 Final Project
 
-## 👥 Team Members(Studend ID)
+## 👥 Team Members(Student ID)
 - Ting Feng (922992561)
 - Hugo Gomez (921810640)
 - Jacob Torres  (921890447)
@@ -30,10 +30,13 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 ## ✨ Nice-to-Have Features
 - [X] Due Dates & Sorting  
-- [X] Dark/Light mode toggle  
-- [X] Checklist sharing functionality  
-- [X] Reorder items  
-- [X] Custom checklist background colors  
+- [X] Dark/Light mode toggle (Works with Apple Dark/Light mode setting)
+- [] Checklist sharing functionality  
+- [X] Reorder items (Did this with sorting) 
+- [] Custom checklist background colors
+- [X] Checklist emoji customization
+- [X] Help Guide
+- [X] Progress bar
 
 ## 🛠️ Technology Stack
 - Swift  
@@ -47,7 +50,7 @@ The **Checklist App** is a productivity application that helps users organize ta
 ### Milestone 1: Project Setup *(Complete)*
 - [x] GitHub repository created  
 - [x] Project proposal finalized  
-- [X] Wireframes created  
+- [X] Wireframes created (Located in Checklist App/Checklist App/Views/Wireframes in Xcode to see them)  
 - [X] Development environment configured  
 
 ### Milestone 2: Prototype *(Complete)*
@@ -77,15 +80,19 @@ The **Checklist App** is a productivity application that helps users organize ta
 
 | Feature                  | Estimated Time | Actual Time | Status       |
 |--------------------------|----------------|-------------|--------------|
-| CoreData Model Setup     | 3 hours        | -           | Done         |
-| Main Checklist View      | 4 hours        | -           | Done         |
-| Item Management          | 3 hours        | -           | Done         |
-| Data Persistence         | 3 hours        | -           | Done         |
-| UI Polish & Animations   | 5 hours        | -           | Done         |
-| Due Dates                | 2 hours        | -           | Done         |
+| CoreData Model Setup     | 3 hours        | 3 hours     | Done         |
+| Main Checklist View      | 4 hours        | 3 hours     | Done         |
+| Item Management          | 3 hours        | 3 hours     | Done         |
+| Data Persistence         | 3 hours        | 3 hours     | Done         |
+| UI Polish & Animations   | 5 hours        | 5 hours     | Done         |
+| Due Dates                | 2 hours        | 2 hours     | Done         |
+| Misc features            | 4 hours        | 8 hours     | Done         |
+| Group meetings and documentation          | 5 hours        | 10 hours     | Done         |
+
+
 
 **Total Estimated Time:** 20~50 hours  
-**Current Time Invested:** *TBD*
+**Current Time Invested:** 40+ hours
 
 ## 🏗️ Technical Implementation
 
