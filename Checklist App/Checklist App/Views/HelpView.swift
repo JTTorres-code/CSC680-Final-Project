@@ -43,6 +43,11 @@ struct HelpView: View {
                         title: "Setting Priority",
                         content: "Set priority level for your tasks, low (green), medium (orange), high (red). This will help know which tasks need to been completed first."
                     )
+                    
+                    HelpSection(
+                        title: "Dark/Light Mode",
+                        content: "On your device if your appearance is set to Light or Dark Mode, the app will change its appearance as well"
+                    )
                 }
                 .padding()
             }
